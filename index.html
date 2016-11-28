@@ -12,101 +12,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-<div id="header">
-    <div class="wrapper">
-        <img class="logo" src="images/logo.png" alt="logo">
-        <h1>新白金英雄坛 - 数据库</h1>
-        <div class="top-search">
-            <select name="" id="type">
-                <option value="0">NPC</option>
-                <option value="1">食物</option>
-                <option value="2">药物</option>
-                <option value="3">武器</option>
-                <option value="4">装备</option>
-                <option value="5">暗器</option>
-                <option value="6">技能</option>
-                <option value="7">其他</option>
-            </select>
-            <input type="text" placeholder="请输入关键字"><button id="doSearch">搜索</button>
+<div id="app" v-cloak>
+    <div id="header">
+        <div class="wrapper">
+            <img class="logo" src="images/logo.png" alt="logo">
+            <h1>新白金英雄坛 - 数据库</h1>
+            <div class="top-search">
+                <select name="" id="type">
+                    <option value="0">NPC</option>
+                    <option value="1">食物</option>
+                    <option value="2">药物</option>
+                    <option value="3">武器</option>
+                    <option value="4">装备</option>
+                    <option value="5">暗器</option>
+                    <option value="6">技能</option>
+                    <option value="7">其他</option>
+                </select>
+                <input type="text" placeholder="请输入关键字"><button id="doSearch">搜索</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="wrapper">
-    <section>
-        <div id="title">
-            <div class="nav">
-                <a href="#">NPC</a>
-                <a href="#">食物</a>
-                <a href="#">药物</a>
-                <a href="#">武器</a>
-                <a href="#">装备</a>
-                <a href="#">暗器</a>
-                <a href="#">技能</a>
-                <a href="#">其他</a>
+    <div class="wrapper">
+        <section>
+            <div id="title">
+                <div class="nav">
+                    <router-link to="/npc">NPC</router-link>
+                    <a href="#">食物</a>
+                    <a href="#">药物</a>
+                    <a href="#">武器</a>
+                    <a href="#">装备</a>
+                    <a href="#">暗器</a>
+                    <a href="#">技能</a>
+                    <a href="#">其他</a>
+                </div>
+                <hr>
+                <span class="credits left">Project maintained by <a href="https://github.com/Shaman05">Shaman</a></span>
+                <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+            </div>
+            <div class="content">
+                <router-view></router-view>
+
             </div>
             <hr>
-            <span class="credits left">Project maintained by <a href="https://github.com/Shaman05">Shaman</a></span>
-            <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-        <div class="content">
-            <table>
-                <tr>
-                    <th>名称</th>
-                    <th>生命</th>
-                    <th>内力</th>
-                    <th>力量</th>
-                    <th>敏捷</th>
-                    <th>悟性</th>
-                    <th>根骨</th>
-                    <th>攻击</th>
-                    <th>防御</th>
-                    <th>命中</th>
-                    <th>回避</th>
-                    <th>描述和天赋</th>
-                </tr>
-                <tr>
-                    <td>种地僧</td>
-                    <td>255</td>
-                    <td>300</td>
-                    <td>31</td>
-                    <td>25</td>
-                    <td>29</td>
-                    <td>31</td>
-                    <td>59</td>
-                    <td>11</td>
-                    <td>11</td>
-                    <td>3</td>
-                    <td>
-                        <div class="more">
-                            <span class="view-desc">查看</span>
-                            <div class="desc">
-                                种地僧看起来约10多岁
-                                <br>
-                                武艺看起来初学乍练
-                                <br>
-                                出手似乎很重
-                                <br>
-                                带着：佛珠 僧服+3 少林棍+3 草鞋
-                                <br>
-                                一位皮肤黝黑的小和尚。他每天辛辛苦苦耕地，为全寺的僧侣贡献自己的汗水，有时也贡献自己的肥料......
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <hr>
-        <div class="footer">
-            <p>
-                新白金英雄坛 V2.69 Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
-            </p>
-        </div>
-    </section>
+            <div class="footer">
+                <p>
+                    新白金英雄坛 {{version}} 非官方数据库 Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
+                </p>
+            </div>
+        </section>
+    </div>
 </div>
+<script type="text/html" id="npc-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort asc">生命</span></th>
+            <th><span class="sort">内力</span></th>
+            <th><span class="sort">力量</span></th>
+            <th><span class="sort">敏捷</span></th>
+            <th><span class="sort">悟性</span></th>
+            <th><span class="sort">根骨</span></th>
+            <th><span class="sort">攻击</span></th>
+            <th><span class="sort">防御</span></th>
+            <th><span class="sort">命中</span></th>
+            <th><span class="sort">回避</span></th>
+            <th>描述和天赋</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].hp}}</td>
+            <td>{{item[version].sp}}</td>
+            <td>{{item[version].str}}</td>
+            <td>{{item[version].dex}}</td>
+            <td>{{item[version].ler}}</td>
+            <td>{{item[version].con}}</td>
+            <td>{{item[version].att}}</td>
+            <td>{{item[version].def}}</td>
+            <td>{{item[version].hit}}</td>
+            <td>{{item[version].agl}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
 <script src="javascripts/zepto.min.js"></script>
 <script src="javascripts/vue.min.js"></script>
 <script src="javascripts/vue-router.min.js"></script>
-<script src="javascripts/app.js"></script>
+<script src="javascripts/require.js" data-main="javascripts/app.js"></script>
 </body>
 </html>
