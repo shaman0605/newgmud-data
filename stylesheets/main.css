@@ -1,0 +1,78 @@
+a:hover{
+    text-decoration: underline;
+}
+#header .wrapper{
+    height: 60px;
+    overflow: hidden;
+    padding-top: 10px;
+    position: relative;
+}
+#header h1{
+    display: inline-block;
+    font-size: 22px;
+    margin: 0 0 0 12px;
+}
+#header .logo,
+#header h1{
+    vertical-align: middle;
+}
+.top-search{
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+.top-search input{
+    font-size: 12px;
+    padding: 2px;
+}
+.top-search select{
+    height: 22px;
+}
+.top-search *{
+    vertical-align: middle;
+}
+.nav{
+    padding-bottom: 20px;
+}
+.nav a{
+    margin-right: 20px;
+}
+.footer{
+    text-align: center;
+}
+.content{
+    padding: 20px 0;
+    min-height: 600px;
+}
+.content th{
+    font-weight: bold;
+    text-align: center;
+}
+.content td{
+    text-align: center;
+}
+.content th:first-of-type,
+.content tr td:first-of-type{
+    text-align: left;
+}
+.more{
+    position: relative;
+}
+.view-desc{
+    color: #ffda76;
+    cursor: pointer;
+}
+.desc{
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    min-width: 400px;
+    padding: 4px 8px;
+    text-align: left;
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+.more:hover .desc{
+    display: block;
+}
