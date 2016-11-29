@@ -3,16 +3,19 @@
  */
 
 requirejs(['item'], function (item) {
+
+    var version = '2.69';
+
     var router = new VueRouter({
         routes: [
-            { path: '/npc', component: item('npc') },
-            { path: '/food', component: item('food') },
-            { path: '/drug', component: item('drug') },
-            { path: '/weapon', component: item('weapon') },
-            { path: '/equip', component: item('equip') },
-            { path: '/h_weapon', component: item('h_weapon') },
-            { path: '/skill', component: item('skill') },
-            { path: '/other', component: item('other') }
+            { path: '/npc', component: item(version, 'npc') },
+            { path: '/food', component: item(version, 'food') },
+            { path: '/drug', component: item(version, 'drug') },
+            { path: '/weapon', component: item(version, 'weapon') },
+            { path: '/equip', component: item(version, 'equip') },
+            { path: '/h_weapon', component: item(version, 'h_weapon') },
+            { path: '/skill', component: item(version, 'skill') },
+            { path: '/other', component: item(version, 'other') }
         ]
     });
 
@@ -29,7 +32,7 @@ requirejs(['item'], function (item) {
     new Vue({
         router: router,
         data: {
-            version: "v2.69"
+            version: version
         }
     }).$mount('#app');
 });

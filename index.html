@@ -56,7 +56,7 @@
             <hr>
             <div class="footer">
                 <p>
-                    新白金英雄坛 {{version}} 非官方数据库 Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
+                    新白金英雄坛 v{{version}} 非官方数据库 Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
                 </p>
             </div>
         </section>
@@ -66,16 +66,16 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort asc">生命</span></th>
-            <th><span class="sort">内力</span></th>
-            <th><span class="sort">力量</span></th>
-            <th><span class="sort">敏捷</span></th>
-            <th><span class="sort">悟性</span></th>
-            <th><span class="sort">根骨</span></th>
-            <th><span class="sort">攻击</span></th>
-            <th><span class="sort">防御</span></th>
-            <th><span class="sort">命中</span></th>
-            <th><span class="sort">回避</span></th>
+            <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命</span></th>
+            <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力</span></th>
+            <th><span class="sort" v-on:click="sort('str')" v-bind:class="{ asc: sortPrototype === 'str' && isAsc, dsc: sortPrototype === 'str' && !isAsc }">力量</span></th>
+            <th><span class="sort" v-on:click="sort('dex')" v-bind:class="{ asc: sortPrototype === 'dex' && isAsc, dsc: sortPrototype === 'dex' && !isAsc }">敏捷</span></th>
+            <th><span class="sort" v-on:click="sort('ler')" v-bind:class="{ asc: sortPrototype === 'ler' && isAsc, dsc: sortPrototype === 'ler' && !isAsc }">悟性</span></th>
+            <th><span class="sort" v-on:click="sort('con')" v-bind:class="{ asc: sortPrototype === 'con' && isAsc, dsc: sortPrototype === 'con' && !isAsc }">根骨</span></th>
+            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击</span></th>
+            <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
+            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
             <th>描述和天赋</th>
         </tr>
         <tr v-for="item in data">
@@ -103,9 +103,9 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort asc">食物</span></th>
-            <th><span class="sort">饮水</span></th>
-            <th><span class="sort">价值</span></th>
+            <th><span class="sort" v-on:click="sort('food')" v-bind:class="{ asc: sortPrototype === 'food' && isAsc, dsc: sortPrototype === 'food' && !isAsc }">食物</span></th>
+            <th><span class="sort" v-on:click="sort('drink')" v-bind:class="{ asc: sortPrototype === 'drink' && isAsc, dsc: sortPrototype === 'drink' && !isAsc }">饮水</span></th>
+            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
             <th><span>出处</span></th>
             <th>描述</th>
         </tr>
@@ -128,10 +128,10 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort asc">生命回复</span></th>
-            <th><span class="sort">体力回复</span></th>
-            <th><span class="sort">内力回复</span></th>
-            <th><span class="sort">价值</span></th>
+            <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命回复</span></th>
+            <th><span class="sort" v-on:click="sort('health')" v-bind:class="{ asc: sortPrototype === 'health' && isAsc, dsc: sortPrototype === 'health' && !isAsc }">体力回复</span></th>
+            <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力回复</span></th>
+            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
             <th><span>出处</span></th>
             <th>描述</th>
         </tr>
@@ -155,10 +155,10 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort">类别</span></th>
-            <th><span class="sort asc">攻击力</span></th>
-            <th><span class="sort">命中</span></th>
-            <th><span class="sort">回避</span></th>
+            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
+            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
             <th><span>出处</span></th>
             <th>描述</th>
         </tr>
@@ -182,10 +182,10 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort">类别</span></th>
-            <th><span class="sort asc">防御</span></th>
-            <th><span class="sort">命中</span></th>
-            <th><span class="sort">回避</span></th>
+            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+            <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
+            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
             <th><span>出处</span></th>
             <th>描述</th>
         </tr>
@@ -209,9 +209,9 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort">攻击力</span></th>
-            <th><span class="sort">命中</span></th>
-            <th><span class="sort">回避</span></th>
+            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
+            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
             <th><span>出处</span></th>
             <th>描述</th>
         </tr>
@@ -234,7 +234,7 @@
     <table>
         <tr>
             <th>名称</th>
-            <th><span class="sort asc">类别</span></th>
+            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
             <th><span>功能</span></th>
             <th><span>出处</span></th>
             <th>描述</th>

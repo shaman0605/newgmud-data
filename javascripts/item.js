@@ -5,12 +5,15 @@
 "use strict";
 
 define(function () {
-    return function (type) {
+
+    return function (version, type) {
         return {
             data: function () {
                 return {
                     data: [],
-                    version: '2.69'
+                    version: version,
+                    sortPrototype: '',
+                    isAsc: false
                 };
             }
             ,
@@ -22,8 +25,22 @@ define(function () {
                 }, 'json')
             },
             methods: {
-                sort: function () {
-                    //
+                sort: function (type) {
+                    var v = this.version;
+                    this.sortPrototype = type;
+                    this.isAsc = !this.isAsc;
+                    var isAsc = this.isAsc;
+                    this.data = this.data.sort(function (item1, item2) {
+                        var data1 = item1[v];
+                        var data2 = item2[v];
+                        if(data1[type] > data2[type]){
+                            return isAsc ? 1 : -1;
+                        }
+                        if(data1[type] < data2[type]){
+                            return isAsc ? -1 : 1;
+                        }
+                        return 0;
+                    });
                 }
             }
         }
