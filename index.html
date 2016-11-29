@@ -151,6 +151,33 @@
         </tr>
     </table>
 </script>
+<script type="text/html" id="weapon-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort">类别</span></th>
+            <th><span class="sort asc">攻击力</span></th>
+            <th><span class="sort">命中</span></th>
+            <th><span class="sort">回避</span></th>
+            <th><span class="sort">出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].type | weaponType}}</td>
+            <td>{{item[version].att}}</td>
+            <td>{{item[version].hit}}</td>
+            <td>{{item[version].agl}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
 <script src="javascripts/zepto.min.js"></script>
 <script src="javascripts/vue.min.js"></script>
 <script src="javascripts/vue-router.min.js"></script>

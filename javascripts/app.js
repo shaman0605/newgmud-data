@@ -11,6 +11,11 @@ requirejs(['item'], function (item) {
             { path: '/weapon', component: item('weapon') }
         ]
     });
+
+    Vue.filter('weaponType', function (type) {
+        return ['刀', '剑', '拳套', '鞭', '杖', '棍'][type];
+    });
+
     new Vue({
         router: router,
         data: {
