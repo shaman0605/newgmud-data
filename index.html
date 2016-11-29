@@ -41,10 +41,10 @@
                     <router-link to="/food">食物</router-link>
                     <router-link to="/drug">药物</router-link>
                     <router-link to="/weapon">武器</router-link>
-                    <a href="#">装备</a>
-                    <a href="#">暗器</a>
+                    <router-link to="/equip">装备</router-link>
+                    <router-link to="/h_weapon">暗器</router-link>
                     <a href="#">技能</a>
-                    <a href="#">其他</a>
+                    <router-link to="/other">其他</router-link>
                 </div>
                 <hr>
                 <span class="credits left">Project maintained by <a href="https://github.com/Shaman05">Shaman</a></span>
@@ -106,7 +106,7 @@
             <th><span class="sort asc">食物</span></th>
             <th><span class="sort">饮水</span></th>
             <th><span class="sort">价值</span></th>
-            <th><span class="sort">出处</span></th>
+            <th><span>出处</span></th>
             <th>描述</th>
         </tr>
         <tr v-for="item in data">
@@ -132,7 +132,7 @@
             <th><span class="sort">体力回复</span></th>
             <th><span class="sort">内力回复</span></th>
             <th><span class="sort">价值</span></th>
-            <th><span class="sort">出处</span></th>
+            <th><span>出处</span></th>
             <th>描述</th>
         </tr>
         <tr v-for="item in data">
@@ -159,7 +159,7 @@
             <th><span class="sort asc">攻击力</span></th>
             <th><span class="sort">命中</span></th>
             <th><span class="sort">回避</span></th>
-            <th><span class="sort">出处</span></th>
+            <th><span>出处</span></th>
             <th>描述</th>
         </tr>
         <tr v-for="item in data">
@@ -168,6 +168,81 @@
             <td>{{item[version].att}}</td>
             <td>{{item[version].hit}}</td>
             <td>{{item[version].agl}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
+<script type="text/html" id="equip-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort">类别</span></th>
+            <th><span class="sort asc">防御</span></th>
+            <th><span class="sort">命中</span></th>
+            <th><span class="sort">回避</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].type | equipType}}</td>
+            <td>{{item[version].def}}</td>
+            <td>{{item[version].hit}}</td>
+            <td>{{item[version].agl}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
+<script type="text/html" id="h_weapon-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort">攻击力</span></th>
+            <th><span class="sort">命中</span></th>
+            <th><span class="sort">回避</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].att}}</td>
+            <td>{{item[version].hit}}</td>
+            <td>{{item[version].agl}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
+<script type="text/html" id="other-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort asc">类别</span></th>
+            <th><span>功能</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].type | otherType}}</td>
+            <td>{{item[version].fun}}</td>
             <td>{{item[version].from}}</td>
             <td>
                 <div class="more">
