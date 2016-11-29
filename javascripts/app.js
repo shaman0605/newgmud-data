@@ -8,6 +8,9 @@ requirejs(['item'], function (item) {
 
     var router = new VueRouter({
         routes: [
+            { path: '/index', component: {
+                template: $('#index-template').html()
+            } },
             { path: '/npc', component: item(version, 'npc') },
             { path: '/food', component: item(version, 'food') },
             { path: '/drug', component: item(version, 'drug') },
@@ -15,7 +18,8 @@ requirejs(['item'], function (item) {
             { path: '/equip', component: item(version, 'equip') },
             { path: '/h_weapon', component: item(version, 'h_weapon') },
             { path: '/skill', component: item(version, 'skill') },
-            { path: '/other', component: item(version, 'other') }
+            { path: '/other', component: item(version, 'other') },
+            { path: '/reinforcement', component: item(version, 'reinforcement') }
         ]
     });
 

@@ -17,6 +17,13 @@ a:hover{
     display: inline-block;
     font-size: 22px;
     margin: 0 0 0 12px;
+    cursor: pointer;
+}
+#header h1.router-link-active{
+    text-decoration: none;
+}
+#header h1:hover{
+    text-decoration: underline;
 }
 #header .logo,
 #header h1{
@@ -60,6 +67,15 @@ a:hover{
 .content th:first-of-type,
 .content tr td:first-of-type{
     text-align: left;
+}
+.content th:last-of-type{
+    width: 100px;
+}
+.content .list-tab th:first-of-type{
+    width: 80px;
+}
+.content .list-tab th:nth-child(2){
+    width: 80px;
 }
 .more{
     position: relative;
@@ -113,4 +129,14 @@ a:hover{
 }
 .sort.dsc:after{
     border-top: 8px solid #b6b6b6;
+}
+.list-tab ul{
+    padding-left: 20px;
+}
+.list-tab li.table{
+    list-style: none;
+    margin-bottom: 20px;
+}
+.sp-desc{
+    text-align: center;
 }

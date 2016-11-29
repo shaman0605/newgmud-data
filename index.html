@@ -16,9 +16,9 @@
     <div id="header">
         <div class="wrapper">
             <img class="logo" src="images/logo.png" alt="logo">
-            <h1>新白金英雄坛 - 数据库</h1>
+            <router-link to="/index" tag="h1">新白金英雄坛 - 数据库</router-link>
             <div class="top-search">
-                <select name="" id="type">
+                <!--<select name="" id="type">
                     <option value="0">NPC</option>
                     <option value="1">食物</option>
                     <option value="2">药物</option>
@@ -28,7 +28,13 @@
                     <option value="6">技能</option>
                     <option value="7">其他</option>
                 </select>
-                <input type="text" placeholder="请输入关键字"><button id="doSearch">搜索</button>
+                <input type="text" placeholder="请输入关键字"><button id="doSearch">搜索</button>-->
+                <label>
+                    当前版本：
+                    <select name="version" id="version">
+                        <option value="269">2.69</option>
+                    </select>
+                </label>
             </div>
         </div>
     </div>
@@ -43,20 +49,45 @@
                     <router-link to="/weapon">武器</router-link>
                     <router-link to="/equip">装备</router-link>
                     <router-link to="/h_weapon">暗器</router-link>
-                    <a href="#">技能</a>
+                    <router-link to="/skill">技能</router-link>
                     <router-link to="/other">其他</router-link>
+                    <router-link to="/reinforcement">装备强化</router-link>
                 </div>
                 <hr>
                 <span class="credits left">Project maintained by <a href="https://github.com/Shaman05">Shaman</a></span>
                 <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
             </div>
             <div class="content">
-                <router-view></router-view>
+                <router-view>
+                    <script type="text/html" id="index-template">
+                        <div class="index">
+                            <h3>关于本站</h3>
+                            <p>本站是新白金英雄坛非官方数据库，所有数据来源均由游戏过程中摘录。</p>
+
+                            <h3>贡献者</h3>
+                            <p>欢迎白金英雄玩家提供各类数据，可联系本站作者（QQ：27231583 &nbsp;&nbsp; 群昵称：【明教】张无忌）。</p>
+                            <!--<p>数据录入方法看<router-link to="/supply">这里</router-link>。</p>-->
+
+                            <h3>待补充和完善</h3>
+                            <ol>
+                                <li>技能页的分类需要优化</li>
+                                <li>唐门NPC数据</li>
+                            </ol>
+
+                            <h3>更新记录</h3>
+                            <ul>
+                                <li>2016-11-28 创建2.69版本</li>
+                            </ul>
+                        </div>
+                    </script>
+                </router-view>
             </div>
             <hr>
             <div class="footer">
                 <p>
-                    新白金英雄坛 v{{version}} 非官方数据库 Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
+                    新白金英雄坛 当前版本v{{version}} Powered By <a href="https://github.com/Shaman05">Shaman</a> © 2016
+                    <br>
+                    官方QQ群: 255861173
                 </p>
             </div>
         </section>
@@ -76,6 +107,7 @@
             <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
             <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
             <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+            <th>掉落</th>
             <th>描述和天赋</th>
         </tr>
         <tr v-for="item in data">
@@ -90,6 +122,7 @@
             <td>{{item[version].def}}</td>
             <td>{{item[version].hit}}</td>
             <td>{{item[version].agl}}</td>
+            <td>不详</td>
             <td>
                 <div class="more">
                     <span class="view-desc">查看</span>
@@ -252,6 +285,185 @@
             </td>
         </tr>
     </table>
+</script>
+<script type="text/html" id="skill-table">
+    <div class="list-tab">
+        <ul>
+            <li>拳脚</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th>技能名称</th>
+                        <th>门派</th>
+                        <th>招式名称</th>
+                        <th>出现等级</th>
+                        <th>武器加成</th>
+                        <th>拳脚加成</th>
+                        <th>其他</th>
+                        <th>技能描述</th>
+                    </tr>
+                    <tr>
+                        <td>学影擒拿手</td>
+                        <td>雪山派</td>
+                        <td>冰封地彻</td>
+                        <td>110</td>
+                        <td>0</td>
+                        <td>250</td>
+                        <td>破防-4 命中10 暴击-10</td>
+                        <td>
+                            <div class="more">
+                                <span class="view-desc">查看</span>
+                                <div class="desc">
+                                    掌门白瑞德所创，威力深不可测，暗含分筋错骨，又加有雪山的冰雪寒气，当年折在白瑞德此路擒拿法下的武林高手不计其数。
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li>兵刃</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th>技能名称</th>
+                        <th>门派</th>
+                        <th>招式名称</th>
+                        <th>出现等级</th>
+                        <th>武器加成</th>
+                        <th>拳脚加成</th>
+                        <th>其他</th>
+                        <th>技能描述</th>
+                    </tr>
+                    <tr>
+                        <td>雪山剑法</td>
+                        <td>雪山派</td>
+                        <td>明月羌笛</td>
+                        <td>70</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>命中5</td>
+                        <td>
+                            <div class="more">
+                                <span class="view-desc">查看</span>
+                                <div class="desc">
+                                    单以招式精巧攻击性强而论，实为天下剑法之冠。此剑法剑式错落，攻击极强，但招招抢攻不求自保，战斗时以速战速决为宜。
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li>轻功</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th>技能名称</th>
+                        <th>门派</th>
+                        <th>爆发特效</th>
+                        <th>技能描述</th>
+                    </tr>
+                    <tr>
+                        <td>踏雪无痕</td>
+                        <td>雪山派</td>
+                        <td>接下来几次连击攻击次数增加</td>
+                        <td>
+                            <div class="more">
+                                <span class="view-desc">查看</span>
+                                <div class="desc">
+                                    大雪山中终年积雪不化，此路轻身功夫施展开当真是雪地无痕，难觅其踪。
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li>内功</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th>技能名称</th>
+                        <th>门派</th>
+                        <th>技能详情</th>
+                        <th>技能描述</th>
+                    </tr>
+                    <tr>
+                        <td>雪山内功</td>
+                        <td>雪山派</td>
+                        <td>
+                            <div class="sp-desc">
+                                内力成长：16<br>
+                                内力血量成长：0.3<br>
+                                吸气力：1.3
+                            </div>
+                        </td>
+                        <td>
+                            <div class="more">
+                                <span class="view-desc">查看</span>
+                                <div class="desc">
+                                    雪山中气候寒冷，更适合习武之人修炼内力，雪山内功也扎实绵密，另有妙用。
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            <li>招架</li>
+            <li>知识</li>
+            <li>绝招</li>
+        </ul>
+    </div>
+</script>
+<script type="text/html" id="reinforcement-table">
+    <div class="list-tab">
+        <ul>
+            <li>武器强化</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th><span class="sort">等级</span></th>
+                        <th>强化名称</th>
+                        <th><span class="sort">强化效果</span></th>
+                        <th>所需符文</th>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>七星</td>
+                        <td>5%概率使敌人呆若木鸡</td>
+                        <td>初级符文碎片1</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>萨特</td>
+                        <td>命中后6%清除敌人身上的正面状态</td>
+                        <td>初级符文碎片1</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>人宇</td>
+                        <td>命中 +5</td>
+                        <td>初级符文碎片3 中级符文碎片1</td>
+                    </tr>
+                </table>
+            </li>
+            <li>防具强化</li>
+            <li class="table">
+                <table>
+                    <tr>
+                        <th>等级</th>
+                        <th>强化名称</th>
+                        <th>强化效果</th>
+                        <th>所需符文</th>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>绿野</td>
+                        <td>增加20点生命上限</td>
+                        <td>初级符文碎片1</td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+    </div>
 </script>
 <script src="javascripts/zepto.min.js"></script>
 <script src="javascripts/vue.min.js"></script>
