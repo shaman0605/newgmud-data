@@ -38,7 +38,7 @@
             <div id="title">
                 <div class="nav">
                     <router-link to="/npc">NPC</router-link>
-                    <a href="#">食物</a>
+                    <router-link to="/food">食物</router-link>
                     <a href="#">药物</a>
                     <a href="#">武器</a>
                     <a href="#">装备</a>
@@ -52,7 +52,6 @@
             </div>
             <div class="content">
                 <router-view></router-view>
-
             </div>
             <hr>
             <div class="footer">
@@ -91,6 +90,31 @@
             <td>{{item[version].def}}</td>
             <td>{{item[version].hit}}</td>
             <td>{{item[version].agl}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
+<script type="text/html" id="food-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort asc">食物</span></th>
+            <th><span class="sort">饮水</span></th>
+            <th><span class="sort">价值</span></th>
+            <th><span class="sort">出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].food}}</td>
+            <td>{{item[version].drink}}</td>
+            <td>{{item[version].cost}}</td>
+            <td>{{item[version].from}}</td>
             <td>
                 <div class="more">
                     <span class="view-desc">查看</span>
