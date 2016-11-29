@@ -2,11 +2,13 @@
  * Created by ChenChao on 2016/11/28.
  */
 
-requirejs(['npc', 'food'], function (npc, food) {
+requirejs(['item'], function (item) {
     var router = new VueRouter({
         routes: [
-            { path: '/npc', component: npc },
-            { path: '/food', component: food }
+            { path: '/npc', component: item('npc') },
+            { path: '/food', component: item('food') },
+            { path: '/drug', component: item('drug') },
+            { path: '/weapon', component: item('weapon') }
         ]
     });
     new Vue({

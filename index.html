@@ -39,8 +39,8 @@
                 <div class="nav">
                     <router-link to="/npc">NPC</router-link>
                     <router-link to="/food">食物</router-link>
-                    <a href="#">药物</a>
-                    <a href="#">武器</a>
+                    <router-link to="/drug">药物</router-link>
+                    <router-link to="/weapon">武器</router-link>
                     <a href="#">装备</a>
                     <a href="#">暗器</a>
                     <a href="#">技能</a>
@@ -113,6 +113,33 @@
             <td>{{item[version].name}}</td>
             <td>{{item[version].food}}</td>
             <td>{{item[version].drink}}</td>
+            <td>{{item[version].cost}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</script>
+<script type="text/html" id="drug-table">
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort asc">生命回复</span></th>
+            <th><span class="sort">体力回复</span></th>
+            <th><span class="sort">内力回复</span></th>
+            <th><span class="sort">价值</span></th>
+            <th><span class="sort">出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].hp}} / {{item[version].hpp}}</td>
+            <td>{{item[version].health}}</td>
+            <td>{{item[version].sp}}</td>
             <td>{{item[version].cost}}</td>
             <td>{{item[version].from}}</td>
             <td>
