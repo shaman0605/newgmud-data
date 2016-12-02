@@ -20,7 +20,7 @@ define(function () {
             template: $('#' + type + '-table').html(),
             created: function () {
                 var _this = this;
-                $.get('data/' + type + '.json', function (data) {
+                $.get('data/' + type + '.json?v=' + +new Date(), function (data) {
                     _this.data = data;
                 }, 'json')
             },

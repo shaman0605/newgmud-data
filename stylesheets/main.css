@@ -65,6 +65,9 @@ a:hover{
     font-weight: bold;
     text-align: center;
 }
+.content tr:hover{
+    background: #1a1a1a;
+}
 .content td{
     text-align: center;
 }
