@@ -7,6 +7,10 @@ a:hover{
 .router-link-active{
     text-decoration: underline;
 }
+.show-name{
+    color: #ff8511;
+    cursor: pointer;
+}
 #header .wrapper{
     height: 60px;
     overflow: hidden;

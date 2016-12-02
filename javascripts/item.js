@@ -33,10 +33,13 @@ define(function () {
                     this.data = this.data.sort(function (item1, item2) {
                         var data1 = item1[v];
                         var data2 = item2[v];
-                        if(data1[type] > data2[type]){
+                        var value1 = parseInt(data1[type]);
+                        var value2 = parseInt(data2[type]);
+                        console.log(value1, value2)
+                        if(value1 > value2){
                             return isAsc ? 1 : -1;
                         }
-                        if(data1[type] < data2[type]){
+                        if(value1 < value2){
                             return isAsc ? -1 : 1;
                         }
                         return 0;
