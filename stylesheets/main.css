@@ -151,3 +151,10 @@ a:hover{
 .sp-desc{
     text-align: center;
 }
+.search-bar{
+    padding-bottom: 12px;
+}
+.search-bar input[type=text]{
+    font-size: 12px;
+    padding: 0 2px;
+}

@@ -11,6 +11,7 @@ define(function () {
             data: function () {
                 return {
                     data: [],
+                    filterKey: '',
                     version: version,
                     sortPrototype: '',
                     isAsc: false
@@ -44,6 +45,9 @@ define(function () {
                         }
                         return 0;
                     });
+                },
+                search: function () {
+                    
                 }
             }
         }

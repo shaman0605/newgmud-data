@@ -80,7 +80,7 @@
 
                             <h3>更新记录</h3>
                             <ul>
-                                <li>2016-12-08 更新部分NPC数据（由 <span class="show-name" title="qq:89501607">自生自灭吧</span> 提供）</li>
+                                <li>2016-12-08 更新部分NPC数据（由 <span class="show-name" title="qq:89501607">自生自灭吧</span> 提供），增加搜索过滤功能</li>
                                 <li>2016-12-02 更新部分NPC数据（由 <span class="show-name" title="qq:89501607">自生自灭吧</span> 提供）</li>
                                 <li>2016-11-28 创建2.69版本</li>
                             </ul>
@@ -100,197 +100,232 @@
     </div>
 </div>
 <script type="text/html" id="npc-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命</span></th>
-            <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力</span></th>
-            <th><span class="sort" v-on:click="sort('str')" v-bind:class="{ asc: sortPrototype === 'str' && isAsc, dsc: sortPrototype === 'str' && !isAsc }">力量</span></th>
-            <th><span class="sort" v-on:click="sort('dex')" v-bind:class="{ asc: sortPrototype === 'dex' && isAsc, dsc: sortPrototype === 'dex' && !isAsc }">敏捷</span></th>
-            <th><span class="sort" v-on:click="sort('ler')" v-bind:class="{ asc: sortPrototype === 'ler' && isAsc, dsc: sortPrototype === 'ler' && !isAsc }">悟性</span></th>
-            <th><span class="sort" v-on:click="sort('con')" v-bind:class="{ asc: sortPrototype === 'con' && isAsc, dsc: sortPrototype === 'con' && !isAsc }">根骨</span></th>
-            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击</span></th>
-            <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
-            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
-            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
-            <th>掉落</th>
-            <th>描述和天赋</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].hp}}</td>
-            <td>{{item[version].sp}}</td>
-            <td>{{item[version].str}}</td>
-            <td>{{item[version].dex}}</td>
-            <td>{{item[version].ler}}</td>
-            <td>{{item[version].con}}</td>
-            <td>{{item[version].att}}</td>
-            <td>{{item[version].def}}</td>
-            <td>{{item[version].hit}}</td>
-            <td>{{item[version].agl}}</td>
-            <td>不详</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命</span></th>
+                <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力</span></th>
+                <th><span class="sort" v-on:click="sort('str')" v-bind:class="{ asc: sortPrototype === 'str' && isAsc, dsc: sortPrototype === 'str' && !isAsc }">力量</span></th>
+                <th><span class="sort" v-on:click="sort('dex')" v-bind:class="{ asc: sortPrototype === 'dex' && isAsc, dsc: sortPrototype === 'dex' && !isAsc }">敏捷</span></th>
+                <th><span class="sort" v-on:click="sort('ler')" v-bind:class="{ asc: sortPrototype === 'ler' && isAsc, dsc: sortPrototype === 'ler' && !isAsc }">悟性</span></th>
+                <th><span class="sort" v-on:click="sort('con')" v-bind:class="{ asc: sortPrototype === 'con' && isAsc, dsc: sortPrototype === 'con' && !isAsc }">根骨</span></th>
+                <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击</span></th>
+                <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
+                <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+                <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+                <th>掉落</th>
+                <th>描述和天赋</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].hp}}</td>
+                <td>{{item[version].sp}}</td>
+                <td>{{item[version].str}}</td>
+                <td>{{item[version].dex}}</td>
+                <td>{{item[version].ler}}</td>
+                <td>{{item[version].con}}</td>
+                <td>{{item[version].att}}</td>
+                <td>{{item[version].def}}</td>
+                <td>{{item[version].hit}}</td>
+                <td>{{item[version].agl}}</td>
+                <td>不详</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="food-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('food')" v-bind:class="{ asc: sortPrototype === 'food' && isAsc, dsc: sortPrototype === 'food' && !isAsc }">食物</span></th>
-            <th><span class="sort" v-on:click="sort('drink')" v-bind:class="{ asc: sortPrototype === 'drink' && isAsc, dsc: sortPrototype === 'drink' && !isAsc }">饮水</span></th>
-            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].food}}</td>
-            <td>{{item[version].drink}}</td>
-            <td>{{item[version].cost}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('food')" v-bind:class="{ asc: sortPrototype === 'food' && isAsc, dsc: sortPrototype === 'food' && !isAsc }">食物</span></th>
+                <th><span class="sort" v-on:click="sort('drink')" v-bind:class="{ asc: sortPrototype === 'drink' && isAsc, dsc: sortPrototype === 'drink' && !isAsc }">饮水</span></th>
+                <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].food}}</td>
+                <td>{{item[version].drink}}</td>
+                <td>{{item[version].cost}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="drug-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命回复</span></th>
-            <th><span class="sort" v-on:click="sort('health')" v-bind:class="{ asc: sortPrototype === 'health' && isAsc, dsc: sortPrototype === 'health' && !isAsc }">体力回复</span></th>
-            <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力回复</span></th>
-            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].hp}} / {{item[version].hpp}}</td>
-            <td>{{item[version].health}}</td>
-            <td>{{item[version].sp}}</td>
-            <td>{{item[version].cost}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命回复</span></th>
+                <th><span class="sort" v-on:click="sort('health')" v-bind:class="{ asc: sortPrototype === 'health' && isAsc, dsc: sortPrototype === 'health' && !isAsc }">体力回复</span></th>
+                <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力回复</span></th>
+                <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].hp}} / {{item[version].hpp}}</td>
+                <td>{{item[version].health}}</td>
+                <td>{{item[version].sp}}</td>
+                <td>{{item[version].cost}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="weapon-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
-            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
-            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
-            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].type | weaponType}}</td>
-            <td>{{item[version].att}}</td>
-            <td>{{item[version].hit}}</td>
-            <td>{{item[version].agl}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+                <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
+                <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+                <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].type | weaponType}}</td>
+                <td>{{item[version].att}}</td>
+                <td>{{item[version].hit}}</td>
+                <td>{{item[version].agl}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="equip-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
-            <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
-            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
-            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].type | equipType}}</td>
-            <td>{{item[version].def}}</td>
-            <td>{{item[version].hit}}</td>
-            <td>{{item[version].agl}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+                <th><span class="sort" v-on:click="sort('def')" v-bind:class="{ asc: sortPrototype === 'def' && isAsc, dsc: sortPrototype === 'def' && !isAsc }">防御</span></th>
+                <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+                <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].type | equipType}}</td>
+                <td>{{item[version].def}}</td>
+                <td>{{item[version].hit}}</td>
+                <td>{{item[version].agl}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="h_weapon-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
-            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
-            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].att}}</td>
-            <td>{{item[version].hit}}</td>
-            <td>{{item[version].agl}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
+                <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+                <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].att}}</td>
+                <td>{{item[version].hit}}</td>
+                <td>{{item[version].agl}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="other-table">
-    <table>
-        <tr>
-            <th>名称</th>
-            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
-            <th><span>功能</span></th>
-            <th><span>出处</span></th>
-            <th>描述</th>
-        </tr>
-        <tr v-for="item in data">
-            <td>{{item[version].name}}</td>
-            <td>{{item[version].type | otherType}}</td>
-            <td>{{item[version].fun}}</td>
-            <td>{{item[version].from}}</td>
-            <td>
-                <div class="more">
-                    <span class="view-desc">查看</span>
-                    <div class="desc" v-html="item[version].desc"></div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div class="data-table-wrap">
+        <div class="search-bar">
+            <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+        </div>
+        <table>
+            <tr>
+                <th>名称</th>
+                <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+                <th><span>功能</span></th>
+                <th><span>出处</span></th>
+                <th>描述</th>
+            </tr>
+            <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+                <td>{{item[version].name}}</td>
+                <td>{{item[version].type | otherType}}</td>
+                <td>{{item[version].fun}}</td>
+                <td>{{item[version].from}}</td>
+                <td>
+                    <div class="more">
+                        <span class="view-desc">查看</span>
+                        <div class="desc" v-html="item[version].desc"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 </script>
 <script type="text/html" id="skill-table">
     <div class="list-tab">
