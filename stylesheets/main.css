@@ -8,8 +8,11 @@ a:hover{
     text-decoration: underline;
 }
 .show-name{
-    color: #ff8511;
+    color: #00d500;
     cursor: pointer;
+}
+.warn-text{
+    color: #ff8511;
 }
 #header .wrapper{
     height: 60px;
