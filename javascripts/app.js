@@ -11,6 +11,9 @@ requirejs(['item'], function (item) {
             { path: '/index', component: {
                 template: $('#index-template').html()
             } },
+            { path: '/commit', component: {
+                template: $('#commit-page').html()
+            } },
             { path: '/npc', component: item(version, 'npc') },
             { path: '/food', component: item(version, 'food') },
             { path: '/drug', component: item(version, 'drug') },
