@@ -2,14 +2,21 @@
  * Created by ChenChao on 2016/11/28.
  */
 
-requirejs(['item'], function (item) {
+requirejs([
+    'item',
+    'text!../template/index.html',
+    'text!../template/commit.html'
+], function (item, indexTpl, commitTpl) {
 
     var version = '2.69';
 
     var router = new VueRouter({
         routes: [
             { path: '/index', component: {
-                template: $('#index-template').html()
+                template: indexTpl
+            } },
+            { path: '/commit', component: {
+                template: commitTpl
             } },
             { path: '/npc', component: item(version, 'npc') },
             { path: '/food', component: item(version, 'food') },
@@ -24,7 +31,7 @@ requirejs(['item'], function (item) {
     });
 
     Vue.filter('weaponType', function (type) {
-        return ['刀', '剑', '拳套', '鞭', '杖', '棍'][type];
+        return ['刀', '剑', '拳套', '鞭', '杖', '棍', '弩'][type];
     });
     Vue.filter('equipType', function (type) {
         return ['帽子', '披风', '饰品', '鞋子', '护甲', '腰带', '衣服'][type];

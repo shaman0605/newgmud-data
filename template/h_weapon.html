@@ -1,0 +1,28 @@
+<div class="data-table-wrap">
+    <div class="search-bar">
+        <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+    </div>
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort" v-on:click="sort('att')" v-bind:class="{ asc: sortPrototype === 'att' && isAsc, dsc: sortPrototype === 'att' && !isAsc }">攻击力</span></th>
+            <th><span class="sort" v-on:click="sort('hit')" v-bind:class="{ asc: sortPrototype === 'hit' && isAsc, dsc: sortPrototype === 'hit' && !isAsc }">命中</span></th>
+            <th><span class="sort" v-on:click="sort('agl')" v-bind:class="{ asc: sortPrototype === 'agl' && isAsc, dsc: sortPrototype === 'agl' && !isAsc }">回避</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].att}}</td>
+            <td>{{item[version].hit}}</td>
+            <td>{{item[version].agl}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

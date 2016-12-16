@@ -10,6 +10,11 @@ a:hover{
 .show-name{
     color: #00d500;
     cursor: pointer;
+    margin: 0 10px;
+}
+.show-name-area{
+    padding: 10px 0;
+    border: 1px dotted #4f4f4e;
 }
 .warn-text{
     color: #ff8511;
