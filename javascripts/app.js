@@ -27,7 +27,7 @@ requirejs(['item'], function (item) {
     });
 
     Vue.filter('weaponType', function (type) {
-        return ['刀', '剑', '拳套', '鞭', '杖', '棍'][type];
+        return ['刀', '剑', '拳套', '鞭', '杖', '棍', '弩'][type];
     });
     Vue.filter('equipType', function (type) {
         return ['帽子', '披风', '饰品', '鞋子', '护甲', '腰带', '衣服'][type];
