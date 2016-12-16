@@ -1,0 +1,30 @@
+<div class="data-table-wrap">
+    <div class="search-bar">
+        <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+    </div>
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort" v-on:click="sort('hp')" v-bind:class="{ asc: sortPrototype === 'hp' && isAsc, dsc: sortPrototype === 'hp' && !isAsc }">生命回复</span></th>
+            <th><span class="sort" v-on:click="sort('health')" v-bind:class="{ asc: sortPrototype === 'health' && isAsc, dsc: sortPrototype === 'health' && !isAsc }">体力回复</span></th>
+            <th><span class="sort" v-on:click="sort('sp')" v-bind:class="{ asc: sortPrototype === 'sp' && isAsc, dsc: sortPrototype === 'sp' && !isAsc }">内力回复</span></th>
+            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].hp}} / {{item[version].hpp}}</td>
+            <td>{{item[version].health}}</td>
+            <td>{{item[version].sp}}</td>
+            <td>{{item[version].cost}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+<div class="data-table-wrap">
+    <div class="search-bar">
+        <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+    </div>
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort" v-on:click="sort('type')" v-bind:class="{ asc: sortPrototype === 'type' && isAsc, dsc: sortPrototype === 'type' && !isAsc }">类别</span></th>
+            <th><span>功能</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].type | otherType}}</td>
+            <td>{{item[version].fun}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

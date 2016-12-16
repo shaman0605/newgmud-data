@@ -4,7 +4,29 @@
 
 "use strict";
 
-define(function () {
+define([
+    'text!../template/npc.html',
+    'text!../template/food.html',
+    'text!../template/drug.html',
+    'text!../template/weapon.html',
+    'text!../template/equip.html',
+    'text!../template/h_weapon.html',
+    'text!../template/other.html',
+    'text!../template/skill.html',
+    'text!../template/reinforcement.html',
+], function (npcTpl, foodTpl, drugTpl, weaponTpl, equipTpl, hWeaponTpl, otherTpl, skillTpl, reinforcementTpl) {
+
+    var tplMap = {
+        npc: npcTpl,
+        food: foodTpl,
+        drug: drugTpl,
+        weapon: weaponTpl,
+        equip: equipTpl,
+        h_weapon: hWeaponTpl,
+        other: otherTpl,
+        skill: skillTpl,
+        reinforcement: reinforcementTpl
+    };
 
     return function (version, type) {
         return {
@@ -18,7 +40,7 @@ define(function () {
                 };
             }
             ,
-            template: $('#' + type + '-table').html(),
+            template: tplMap[type],
             created: function () {
                 var _this = this;
                 $.get('data/' + type + '.json?v=' + +new Date(), function (data) {

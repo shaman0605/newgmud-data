@@ -1,0 +1,28 @@
+<div class="data-table-wrap">
+    <div class="search-bar">
+        <label>搜索：<input type="text" placeholder="输入名称关键字" v-model="filterKey"></label>
+    </div>
+    <table>
+        <tr>
+            <th>名称</th>
+            <th><span class="sort" v-on:click="sort('food')" v-bind:class="{ asc: sortPrototype === 'food' && isAsc, dsc: sortPrototype === 'food' && !isAsc }">食物</span></th>
+            <th><span class="sort" v-on:click="sort('drink')" v-bind:class="{ asc: sortPrototype === 'drink' && isAsc, dsc: sortPrototype === 'drink' && !isAsc }">饮水</span></th>
+            <th><span class="sort" v-on:click="sort('cost')" v-bind:class="{ asc: sortPrototype === 'cost' && isAsc, dsc: sortPrototype === 'cost' && !isAsc }">价值</span></th>
+            <th><span>出处</span></th>
+            <th>描述</th>
+        </tr>
+        <tr v-for="item in data" v-if="!filterKey || item[version].name.indexOf(filterKey) > -1">
+            <td>{{item[version].name}}</td>
+            <td>{{item[version].food}}</td>
+            <td>{{item[version].drink}}</td>
+            <td>{{item[version].cost}}</td>
+            <td>{{item[version].from}}</td>
+            <td>
+                <div class="more">
+                    <span class="view-desc">查看</span>
+                    <div class="desc" v-html="item[version].desc"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

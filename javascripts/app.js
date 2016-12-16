@@ -2,17 +2,21 @@
  * Created by ChenChao on 2016/11/28.
  */
 
-requirejs(['item'], function (item) {
+requirejs([
+    'item',
+    'text!../template/index.html',
+    'text!../template/commit.html'
+], function (item, indexTpl, commitTpl) {
 
     var version = '2.69';
 
     var router = new VueRouter({
         routes: [
             { path: '/index', component: {
-                template: $('#index-template').html()
+                template: indexTpl
             } },
             { path: '/commit', component: {
-                template: $('#commit-page').html()
+                template: commitTpl
             } },
             { path: '/npc', component: item(version, 'npc') },
             { path: '/food', component: item(version, 'food') },
